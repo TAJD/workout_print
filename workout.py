@@ -22,9 +22,9 @@ Function to generate workout for a given main exercise and week number?
 """
 
 import numpy as np
-from pylatex import Document, PageStyle, Head, MiniPage, Foot, LargeText, \
+from pylatex import Document, PageStyle, Head, MiniPage, LargeText, \
     MediumText, LineBreak, simple_page_number, Package, Section,  Tabular,\
-    MultiRow,  MultiColumn
+    MultiColumn, VerticalSpace, Subsection
 from pylatex.utils import bold
 import time as t
 
@@ -40,8 +40,9 @@ def calc_main_lift(one_rm, no):
         array (2 columns x 3 rows)
     """
     one_rm *= 0.90  # convert one rep max to 90% of 1rm
-    pc = np.array([[0.65, 0.75, 0.8], [0.7, 0.8, 0.85], [0.75, 0.85, 0.9]])
-    reps = ([[8, 8, 8], [6, 6, 6], [8, 6, 3]])
+    pc = np.array([[0.65, 0.75, 0.8], [0.7, 0.8, 0.85], [0.75, 0.85, 0.9],
+                  [0.4, 0.5, 0.6]])
+    reps = ([[8, 8, 8], [6, 6, 6], [8, 6, 3], [10, 10, 10]])
     wo = no - 1
     return (weight(pc[wo]*one_rm), reps[wo])
 
@@ -57,14 +58,20 @@ def gen_main_lift(lift, one_rm, no):
     Return:
         pylatex table object
     """
-    table = Tabular('|c|c|c|')
+    r_and_w = calc_main_lift(one_rm, no)
+
+    table = Tabular('|c|c|c|c|c|c|')
+    # table.add_hline()
+    # table.add_row((MultiColumn(3, align='|c|', data=lift + " workout " +
+    #                str(no)),))
     table.add_hline()
-    table.add_row((MultiColumn(3, align='|c|', data=lift + " workout " +
-                   str(no)),))
+    table.add_row(('Warm up', 'Warm up', 'Warm up', 'Set 1', 'Set 2', 'Set 3'))
     table.add_hline()
-    table.add_row(('Set 1', 'Set 2', 'Set 3'))
+    table.add_row(('', '', '',
+                   str(r_and_w[1][0])+' x ' + str(r_and_w[0][0]),
+                   str(r_and_w[1][1])+' x ' + str(r_and_w[0][1]),
+                   str(r_and_w[1][2])+' x '+str(r_and_w[0][2])))
     table.add_hline()
-    table.add_row(())
     return table
 
 
@@ -79,19 +86,56 @@ def gen_accessory_table(accessorys):
     Return:
         Table with the required columns for sets reps and weights.
     """
-    table = Tabular('|c|c|c|c|c|c|')
+    table = Tabular('|c|c|c|c|c|c|c|c|c|')
     table.add_hline()
-    table.add_row((MultiColumn(6, align='|c|', data='Accessory Exercises'),))
+    table.add_row(('Exercise', 'Weight', 'Reps', 'Weight', 'Reps', 'Weight',
+                   'Reps', 'Weight', 'Reps'))
+    table.add_hline()
+    for i in range(len(accessorys)):
+        table.add_row((str(accessorys[i]), '', '', '',  '', '',  '', '', ''))
+        table.add_hline()
     return table
 
 
-def gen_week(doc, main_lifts):
+def print_workout(doc, lift, one_rm, no, accessorys):
+    """Print one workout routine.
+
+    Arguments:
+        lift
+        one_rm
+        no
+        accessorys
+
+    Returns:
+        One workout
+    """
+    doc.append(VerticalSpace("20pt"))
+    doc.append(LineBreak())
+    main_lift = gen_main_lift(lift, one_rm, no)
+    access = gen_accessory_table(accessorys)
+
+    with doc.create(MiniPage(width=r"0.5\textwidth")):
+        doc.append(bold('Main Lift\n\n'))
+        doc.append(main_lift)
+        doc.append(VerticalSpace("20pt"))
+        doc.append(LineBreak())
+        doc.append(bold('Accessory Exercises\n\n'))
+        doc.append(access)
+        # doc.append(main_lift)
+
+    doc.append(VerticalSpace("20pt"))
+    doc.append(LineBreak())
+    return doc
+
+
+def gen_week(doc, main_lifts, no, accessorys):
     """ Function to generate a weeks workout"""
-    for i in range(len(main_lifts)):
-        title = main_lifts[i][0]
-        with doc.create(Section(title)):
-            doc.append('1 RM is ' + str(main_lifts[i][1]) + 'kg\n')
-            doc.append('insert reps and weights here')
+    with doc.create(Section('Phase ' + str(no))):
+        for i in range(len(main_lifts)):
+            title = main_lifts[i][0]
+            with doc.create(Subsection(title)):
+                print_workout(doc, main_lifts[i][0], main_lifts[i][1], no,
+                              accessorys[i])
     return doc
 
 
@@ -103,28 +147,29 @@ def generate_header():
     with header.create(Head("L")):
         header.append("Weights updated: 25/01/16")
         header.append(LineBreak())
-        # header.append("R3")
     # Create center header
     with header.create(Head("C")):
         header.append("Workout Routine")
     # Create right header
     with header.create(Head("R")):
         header.append(simple_page_number())
-    # # Create left footer
-    # with header.create(Foot("L")):
-    #     header.append("Left Footer")
-    # # Create center footer
-    # with header.create(Foot("C")):
-    #     header.append("Center Footer")
-    # # Create right footer
-    # with header.create(Foot("R")):
-    #     header.append("Right Footer")
     return header
 
 
 def compile_document():
-    bench = [('Incline BP', '(4 x 12)'),
-             ('Pull up', '(4 x Max)')]
+    # currently testing the production of a weeks workout
+    no = 1
+    bench = [('Incline DB Press (4 x 12)'),
+             ('Face pull (4 x 12)'),
+             ('Cable flyes ss/w press (4 x 12)'),
+             ('Press ups (4 x Max)')]
+    squat = [('Leg press (4 x 15)'), ('Leg extension (4 x 12)'),
+             ('Leg curl (4 x 12)'), ('Roll out (4 x Max)')]
+    dead = [('Good morning (4 x 8-12)')]
+    press = [('Landmine press (4 x 8-12)')]
+
+    acc = [bench, squat, press, dead]
+
     main_lifts = [('Bench', 85),
                   ('Squat', 100),
                   ('Military Press', 45),
@@ -137,18 +182,18 @@ def compile_document():
     doc.packages.append(Package('float'))
     doc.packages.append(Package('graphicx'))
     header = generate_header()
-
     doc.preamble.append(header)
     doc.change_document_style("header")
 
-    # Add Heading
-    with doc.create(MiniPage(align='c')):
-        doc.append(LargeText(bold("8/6/3 Workout Routine")))
-        doc.append(LineBreak())
-        doc.append(MediumText(bold("As of: " + date)))
+    # Add title
 
-    gen_week(doc, main_lifts)
-    doc.append(gen_main_lift('bench', 85, 1))
+    doc.append(LargeText(bold("8/6/3 Workout Routine")))
+    doc.append(LineBreak())
+    doc.append(MediumText(bold("As of: " + date)))
+    doc.append(LineBreak())
+
+    # Add workout for a week
+    gen_week(doc, main_lifts, no, acc)
     doc.generate_pdf("workout_routine", clean_tex=True)
 
 
@@ -159,9 +204,40 @@ def weight(w, base=2.5):
     return np.round(base*np.round(w/base), 2)
 
 
+def produce_table():
+    # create document structure
+    doc = Document("testtable")
+    section = Section('Produce accessories table')
+    test1 = Subsection('Test accessories table production')
+
+    # input code
+    bench = [('Incline BP (4 x 12)'),
+             ('Pull up (4 x Max)')]
+
+    # test code
+    accesory = bench
+    table = Tabular('|c|c|c|c|c|c|c|c|c|')
+    table.add_hline()
+    table.add_row((MultiColumn(9, align='|c|', data='Accessories'),))
+    table.add_hline()
+    table.add_row(('Exercise', 'Weight', 'Reps', 'Weight', 'Reps', 'Weight',
+                   'Reps', 'Weight', 'Reps'))
+    table.add_hline()
+    for i in range(len(accesory)):
+        table.add_row((str(accesory[i]), '', '', '',  '', '',  '', '', ''))
+        table.add_hline()
+
+    # append table to document
+    test1.append(table)
+    section.append(test1)
+    doc.append(section)
+    doc.generate_pdf(clean_tex=True)
+
+
 if __name__ == "__main__":
-    one_rm = 100
-    no = 1
-    calcs = calc_main_lift(one_rm, no)
-    print(calcs)
-    # compile_document()
+    # one_rm = 100
+    # no = 1
+    # calcs = calc_main_lift(one_rm, no)
+    # print(calcs)
+    produce_table()
+    compile_document()
