@@ -111,6 +111,7 @@ def print_workout(doc, lift, one_rm, no, accessorys):
     """
     doc.append(VerticalSpace("20pt"))
     doc.append(LineBreak())
+
     main_lift = gen_main_lift(lift, one_rm, no)
     access = gen_accessory_table(accessorys)
 
@@ -134,6 +135,9 @@ def gen_week(doc, main_lifts, no, accessorys):
         for i in range(len(main_lifts)):
             title = main_lifts[i][0]
             with doc.create(Subsection(title)):
+                doc.append('Date: ')
+                doc.append(LineBreak())
+                doc.append('Weight: ')
                 print_workout(doc, main_lifts[i][0], main_lifts[i][1], no,
                               accessorys[i])
     return doc
@@ -149,31 +153,35 @@ def generate_header():
         header.append(LineBreak())
     # Create center header
     with header.create(Head("C")):
-        header.append("Workout Routine")
+        header.append("8/6/3 Workout with BB Accessories")
     # Create right header
     with header.create(Head("R")):
         header.append(simple_page_number())
     return header
 
 
-def compile_document():
+def compile_document_week(no):
     # currently testing the production of a weeks workout
-    no = 1
+
+    # input accessory lifts for main lifts
     bench = [('Incline DB Press (4 x 12)'),
              ('Face pull (4 x 12)'),
              ('Cable flyes ss/w press (4 x 12)'),
              ('Press ups (4 x Max)')]
     squat = [('Leg press (4 x 15)'), ('Leg extension (4 x 12)'),
              ('Leg curl (4 x 12)'), ('Roll out (4 x Max)')]
-    dead = [('Good morning (4 x 8-12)')]
-    press = [('Landmine press (4 x 8-12)')]
+    dead = [('BB Row (4 x 8-12)'), ('Hip thrust (4 x 8-12)'),
+            ('Pull up (4 x Max)'), ('Leg raise (4 x 8-12)')]
+    press = [('Landmine press (4 x 8-12)'), ('Lateral/Rear raises (4 x 8-12)'),
+             ('DB Curls (4 x 8-12)'), ('Roll outs (4 x Max)')]
 
     acc = [bench, squat, press, dead]
 
+    # input main lifts and one rep maxes
     main_lifts = [('Bench', 85),
-                  ('Squat', 100),
-                  ('Military Press', 45),
-                  ('Deadlift', 110)]
+                  ('Squat', 118),
+                  ('Military Press', 58.5),
+                  ('Deadlift', 133)]
 
     date = t.strftime("%d/%m/%Y")
     doc = Document()
@@ -186,7 +194,7 @@ def compile_document():
     doc.change_document_style("header")
 
     # Add title
-
+    doc.append(LineBreak())
     doc.append(LargeText(bold("8/6/3 Workout Routine")))
     doc.append(LineBreak())
     doc.append(MediumText(bold("As of: " + date)))
@@ -236,8 +244,8 @@ def produce_table():
 
 if __name__ == "__main__":
     # one_rm = 100
-    # no = 1
+    no = 2
     # calcs = calc_main_lift(one_rm, no)
     # print(calcs)
-    produce_table()
-    compile_document()
+    # produce_table()
+    compile_document_week(no)
