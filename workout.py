@@ -178,6 +178,7 @@ def compile_document_week(no):
     acc = [bench, squat, press, dead]
 
     # input main lifts and one rep maxes
+    # last updated 25/01/2017
     main_lifts = [('Bench', 85),
                   ('Squat', 118),
                   ('Military Press', 58.5),
@@ -209,6 +210,7 @@ def compile_document_week(no):
 
 
 def weight(w, base=2.5):
+    "Lowest plate weight at my gym is 1.25 kg."
     return np.round(base*np.round(w/base), 2)
 
 
@@ -218,7 +220,7 @@ def produce_table():
     section = Section('Produce accessories table')
     test1 = Subsection('Test accessories table production')
 
-    # input code
+    # test input code
     bench = [('Incline BP (4 x 12)'),
              ('Pull up (4 x Max)')]
 
@@ -244,7 +246,7 @@ def produce_table():
 
 if __name__ == "__main__":
     # one_rm = 100
-    no = 2
+    no = 3
     # calcs = calc_main_lift(one_rm, no)
     # print(calcs)
     # produce_table()

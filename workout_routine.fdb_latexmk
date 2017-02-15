@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1486913506 "workout_routine.tex" "workout_routine.pdf" "workout_routine" 1486913506
+["pdflatex"] 1487154173 "workout_routine.tex" "workout_routine.pdf" "workout_routine" 1487154173
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm" 1136768653 4524 6bce29db5bc272ba5f332261583fee9c ""
@@ -72,9 +72,9 @@
   "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
   "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1446394071 3849859 959a4825072dc2c268988bbba504dd0c ""
   "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
-  "workout_routine.aux" 1486913352 90 e064d179621fa96d6f3b5b70db4c55e1 ""
-  "workout_routine.tex" 1486913506 3728 edceb0bff1e3abc57e0045496878286f ""
+  "workout_routine.aux" 1486913507 90 e064d179621fa96d6f3b5b70db4c55e1 ""
+  "workout_routine.tex" 1487154173 3729 0d976ff74a5ce7f2f826e03015dffc9a ""
   (generated)
-  "workout_routine.aux"
-  "workout_routine.log"
   "workout_routine.pdf"
+  "workout_routine.log"
+  "workout_routine.aux"
