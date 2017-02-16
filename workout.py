@@ -179,10 +179,10 @@ def compile_document_week(no):
 
     # input main lifts and one rep maxes
     # last updated 25/01/2017
-    main_lifts = [('Bench', 85),
-                  ('Squat', 118),
-                  ('Military Press', 58.5),
-                  ('Deadlift', 133)]
+    main_lifts = [('Bench', 87.5),
+                  ('Squat', 123),
+                  ('Military Press', 61),
+                  ('Deadlift', 138)]
 
     date = t.strftime("%d/%m/%Y")
     doc = Document()
@@ -246,7 +246,7 @@ def produce_table():
 
 if __name__ == "__main__":
     # one_rm = 100
-    no = 3
+    no = 1
     # calcs = calc_main_lift(one_rm, no)
     # print(calcs)
     # produce_table()
