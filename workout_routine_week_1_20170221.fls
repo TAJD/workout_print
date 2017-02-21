@@ -2,8 +2,8 @@ PWD /Users/thomasdickson/Documents/workout_print
 INPUT /usr/local/texlive/2015/texmf.cnf
 INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT workout_routine.tex
-OUTPUT workout_routine.log
+INPUT workout_routine_week_1_20170221.tex
+OUTPUT workout_routine_week_1_20170221.log
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/size10.clo
@@ -68,9 +68,9 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/ms/everysel.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/ms/everysel.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-INPUT workout_routine.aux
-INPUT workout_routine.aux
-OUTPUT workout_routine.aux
+INPUT workout_routine_week_1_20170221.aux
+INPUT workout_routine_week_1_20170221.aux
+OUTPUT workout_routine_week_1_20170221.aux
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/t1ptm.fd
@@ -119,7 +119,7 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/lm/lmsy5.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/lm/omxlmex.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/lm/omxlmex.fd
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/lm/lmex10.tfm
-OUTPUT workout_routine.pdf
+OUTPUT workout_routine_week_1_20170221.pdf
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map
@@ -129,7 +129,7 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
-INPUT workout_routine.aux
+INPUT workout_routine_week_1_20170221.aux
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb

@@ -131,7 +131,7 @@ def print_workout(doc, lift, one_rm, no, accessorys):
 
 def gen_week(doc, main_lifts, no, accessorys):
     """ Function to generate a weeks workout"""
-    with doc.create(Section('Phase ' + str(no))):
+    with doc.create(Section('Week ' + str(no))):
         for i in range(len(main_lifts)):
             title = main_lifts[i][0]
             with doc.create(Subsection(title)):
@@ -155,8 +155,8 @@ def generate_header():
     with header.create(Head("C")):
         header.append("8/6/3 Workout with BB Accessories")
     # Create right header
-    with header.create(Head("R")):
-        header.append(simple_page_number())
+    # with header.create(Head("R")):
+    #     header.append(simple_page_number())
     return header
 
 
@@ -168,8 +168,10 @@ def compile_document_week(no):
              ('Face pull (4 x 12)'),
              ('Cable flyes ss/w press (4 x 12)'),
              ('Press ups (4 x Max)')]
-    squat = [('Leg press (4 x 15)'), ('Leg extension (4 x 12)'),
-             ('Leg curl (4 x 12)'), ('Roll out (4 x Max)')]
+    # squat = [('Leg press (4 x 15)'), ('Leg extension (4 x 12)'),
+    #          ('Leg curl (4 x 12)'), ('Roll out (4 x Max)')]
+    squat = [('Smith Front/Back (4 x 12)'), ('Calf Raises (4 x 12)'),
+             ('Reverse Lunges (4 x 12)'), ('Roll out (4 x Max)')]
     dead = [('BB Row (4 x 8-12)'), ('Hip thrust (4 x 8-12)'),
             ('Pull up (4 x Max)'), ('Leg raise (4 x 8-12)')]
     press = [('Landmine press (4 x 8-12)'), ('Lateral/Rear raises (4 x 8-12)'),
@@ -203,7 +205,9 @@ def compile_document_week(no):
 
     # Add workout for a week
     gen_week(doc, main_lifts, no, acc)
-    doc.generate_pdf("workout_routine", clean_tex=True)
+    date_1 = t.strftime("%Y%m%d")
+    filename = "workout_routine_week_"+str(no)+"_"+date_1
+    doc.generate_pdf(filename, clean_tex=True)
 
 
 #  calculations for workout
