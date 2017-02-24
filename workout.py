@@ -23,10 +23,11 @@ Function to generate workout for a given main exercise and week number?
 
 import numpy as np
 from pylatex import Document, PageStyle, Head, MiniPage, LargeText, \
-    MediumText, LineBreak, simple_page_number, Package, Section,  Tabular,\
+    MediumText, LineBreak, Package, Section,  Tabular,\
     MultiColumn, VerticalSpace, Subsection
 from pylatex.utils import bold
 import time as t
+import os
 
 
 def calc_main_lift(one_rm, no):
@@ -164,18 +165,24 @@ def compile_document_week(no):
     # currently testing the production of a weeks workout
 
     # input accessory lifts for main lifts
-    bench = [('Incline DB Press (4 x 12)'),
+    bench = [('Decline DB Press (4 x 12)'),
              ('Face pull (4 x 12)'),
              ('Low/High flyes ss/w press (4 x 12)'),
              ('Press ups (4 x Max)')]
     # squat = [('Leg press (4 x 15)'), ('Leg extension (4 x 12)'),
     #          ('Leg curl (4 x 12)'), ('Roll out (4 x Max)')]
-    squat = [('Smith Front/Back (4 x 12)'), ('Calf Raises (4 x 12)'),
-             ('Reverse Lunges (4 x 12)'), ('Roll out (4 x Max)')]
-    dead = [('BB Row (4 x 8-12)'), ('Hip thrust (4 x 8-12)'),
-            ('Pull up (4 x Max)'), ('Leg raise (4 x 8-12)')]
-    press = [('Landmine press (4 x 8-12)'), ('Lateral/Rear raises (4 x 8-12)'),
-             ('DB Curls (4 x 8-12)'), ('Roll outs (4 x Max)')]
+    squat = [('Smith Front/Back (4 x 12)'),
+             ('Calf Raises (4 x 12)'),
+             ('Walking Lunges (4 x 12)'),
+             ('Roll out (4 x Max)')]
+    dead = [('BB Row (4 x 8-12)'),
+            ('Hip thrust (4 x 8-12)'),
+            ('Pull up (4 x Max)'),
+            ('Leg raise (4 x 8-12)')]
+    press = [('Landmine press (4 x 8-12)'),
+             ('Lateral/Rear raises (4 x 8-12)'),
+             ('DB Curls (4 x 8-12)'),
+             ('Roll outs (4 x Max)')]
 
     acc = [bench, squat, press, dead]
 
@@ -206,9 +213,9 @@ def compile_document_week(no):
     # Add workout for a week
     gen_week(doc, main_lifts, no, acc)
     date_1 = t.strftime("%Y%m%d")
-    filename = "workout_routine_week_"+str(no)+"_"+date_1
+    filename = ("/Users/thomasdickson/Documents/workout_print/" +
+                "workouts/workout_routine_week_"+str(no)+"_"+date_1)
     doc.generate_pdf(filename, clean_tex=True)
-
 
 #  calculations for workout
 
@@ -248,10 +255,27 @@ def produce_table():
     doc.generate_pdf(clean_tex=True)
 
 
+def remove_files():
+    directory = "/Users/thomasdickson/Documents/workout_print/workouts/"
+    test = os.listdir(directory)
+    for item in test:
+        if item.endswith(".aux"):
+            os.remove(os.path.join(directory, item))
+        if item.endswith(".fdb_latexmk"):
+            os.remove(os.path.join(directory, item))
+        if item.endswith(".fls"):
+            os.remove(os.path.join(directory, item))
+        if item.endswith(".log"):
+            os.remove(os.path.join(directory, item))
+        if item.endswith(".tex"):
+            os.remove(os.path.join(directory, item))
+
+
 if __name__ == "__main__":
     # one_rm = 100
-    no = 2
+    no = 1
     # calcs = calc_main_lift(one_rm, no)
     # print(calcs)
     # produce_table()
-    compile_document_week(no)
+    # compile_document_week(no)
+    remove_files()
