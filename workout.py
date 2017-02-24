@@ -149,7 +149,7 @@ def generate_header():
     header = PageStyle("header")
     # Create left header
     with header.create(Head("L")):
-        header.append("Weights updated: 25/01/16")
+        header.append("Weights updated: 24/02/16")
         header.append(LineBreak())
     # Create center header
     with header.create(Head("C")):
@@ -166,7 +166,7 @@ def compile_document_week(no):
     # input accessory lifts for main lifts
     bench = [('Incline DB Press (4 x 12)'),
              ('Face pull (4 x 12)'),
-             ('Cable flyes ss/w press (4 x 12)'),
+             ('Low/High flyes ss/w press (4 x 12)'),
              ('Press ups (4 x Max)')]
     # squat = [('Leg press (4 x 15)'), ('Leg extension (4 x 12)'),
     #          ('Leg curl (4 x 12)'), ('Roll out (4 x Max)')]
@@ -180,7 +180,7 @@ def compile_document_week(no):
     acc = [bench, squat, press, dead]
 
     # input main lifts and one rep maxes
-    # last updated 25/01/2017
+    # last updated 24/02/2017
     main_lifts = [('Bench', 87.5),
                   ('Squat', 123),
                   ('Military Press', 61),
@@ -250,7 +250,7 @@ def produce_table():
 
 if __name__ == "__main__":
     # one_rm = 100
-    no = 1
+    no = 2
     # calcs = calc_main_lift(one_rm, no)
     # print(calcs)
     # produce_table()
