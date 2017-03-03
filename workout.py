@@ -273,7 +273,7 @@ def remove_files():
 
 if __name__ == "__main__":
     # one_rm = 100
-    no = 1
+    no = 2
     # calcs = calc_main_lift(one_rm, no)
     # print(calcs)
     # produce_table()
