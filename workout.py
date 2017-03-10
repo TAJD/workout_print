@@ -162,7 +162,7 @@ def generate_header():
 
 
 def compile_document_week(no):
-    # currently testing the production of a weeks workout
+    "produce a pdf of the weeks workout"
 
     # input accessory lifts for main lifts
     bench = [('Decline DB Press (4 x 12)'),
@@ -175,7 +175,7 @@ def compile_document_week(no):
              ('Calf Raises (4 x 12)'),
              ('Walking Lunges (4 x 12)'),
              ('Roll out (4 x Max)')]
-    dead = [('BB Row (4 x 8-12)'),
+    dead = [('Pendlay Row (4 x 8-12)'),
             ('Hip thrust (4 x 8-12)'),
             ('Pull up (4 x Max)'),
             ('Leg raise (4 x 8-12)')]
@@ -187,11 +187,11 @@ def compile_document_week(no):
     acc = [bench, squat, press, dead]
 
     # input main lifts and one rep maxes
-    # last updated 24/02/2017
-    main_lifts = [('Bench', 87.5),
-                  ('Squat', 123),
-                  ('Military Press', 61),
-                  ('Deadlift', 138)]
+    # last updated 09/03/2017
+    main_lifts = [('Bench', 90),
+                  ('Squat', 128),
+                  ('Military Press', 63.5),
+                  ('Deadlift', 143)]
 
     date = t.strftime("%d/%m/%Y")
     doc = Document()
@@ -272,10 +272,6 @@ def remove_files():
 
 
 if __name__ == "__main__":
-    # one_rm = 100
-    no = 2
-    # calcs = calc_main_lift(one_rm, no)
-    # print(calcs)
-    # produce_table()
+    no = 1
     # compile_document_week(no)
     remove_files()
