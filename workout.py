@@ -187,11 +187,11 @@ def compile_document_week(no):
     acc = [bench, squat, press, dead]
 
     # input main lifts and one rep maxes
-    # last updated 09/03/2017
-    main_lifts = [('Bench', 90),
-                  ('Squat', 128),
-                  ('Military Press', 63.5),
-                  ('Deadlift', 143)]
+    # last updated 21/03/2017
+    main_lifts = [('Bench', 92.5),
+                  ('Squat', 133),
+                  ('Military Press', 65.5),
+                  ('Deadlift', 148)]
 
     date = t.strftime("%d/%m/%Y")
     doc = Document()
@@ -213,8 +213,8 @@ def compile_document_week(no):
     # Add workout for a week
     gen_week(doc, main_lifts, no, acc)
     date_1 = t.strftime("%Y%m%d")
-    filename = ("/Users/thomasdickson/Documents/workout_print/" +
-                "workouts/workout_routine_week_"+str(no)+"_"+date_1)
+    directory = "/home/thomas/Documents/workout_print/workouts"
+    filename = (directory + "/workout_routine_week_"+str(no)+"_"+date_1)
     doc.generate_pdf(filename, clean_tex=True)
 
 #  calculations for workout
@@ -256,7 +256,8 @@ def produce_table():
 
 
 def remove_files():
-    directory = "/Users/thomasdickson/Documents/workout_print/workouts/"
+    # directory = "/Users/thomasdickson/Documents/workout_print/workouts/"
+    directory = "/home/thomas/Documents/workout_print/workouts"
     test = os.listdir(directory)
     for item in test:
         if item.endswith(".aux"):
@@ -272,6 +273,6 @@ def remove_files():
 
 
 if __name__ == "__main__":
-    no = 1
+    no = 4
     # compile_document_week(no)
     remove_files()
