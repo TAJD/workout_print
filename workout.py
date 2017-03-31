@@ -188,10 +188,10 @@ def compile_document_week(no):
 
     # input main lifts and one rep maxes
     # last updated 21/03/2017
-    main_lifts = [('Bench', 92.5),
-                  ('Squat', 133),
-                  ('Military Press', 65.5),
-                  ('Deadlift', 148)]
+    main_lifts = [('Bench', 90),
+                  ('Squat', 128),
+                  ('Military Press', 63),
+                  ('Deadlift', 143)]
 
     date = t.strftime("%d/%m/%Y")
     doc = Document()
@@ -273,6 +273,8 @@ def remove_files():
 
 
 if __name__ == "__main__":
-    no = 4
-    # compile_document_week(no)
-    remove_files()
+    try:
+        no = 4
+        compile_document_week(no)
+    except:
+        remove_files()
